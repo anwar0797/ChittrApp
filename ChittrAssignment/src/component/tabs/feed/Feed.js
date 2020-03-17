@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import {CustomHeader} from '../../CustomHeader';
-import {Card, CardItem, Thumbnail} from 'native-base';
+import {Card, CardItem, Thumbnail, Button} from 'native-base';
 import {IMAGE} from '../../../constants/Image';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 //import FloatingButton from '../../FloatingButton';
@@ -59,6 +59,12 @@ export class Feed extends React.Component {
           <CardItem style={{backgroundColor: 'rgb(27, 40, 54)'}}>
             <Text style={styles.text}>{item.chit_content}</Text>
           </CardItem>
+          <Button
+              style={{padding: 15, height: 20}}
+              block
+              onPress={() => this.props.navigation.navigate('Location')}>
+              <Text>View Location</Text>
+            </Button>
         </Card>
       </View>
     );
