@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {CustomHeader} from '../CustomHeader';
-import {Card, CardItem, Thumbnail} from 'native-base';
+import {Card, CardItem, Thumbnail, Body, Button} from 'native-base';
+import {IMAGE} from '../../constants/Image';
 
 export class Profile extends React.Component {
   constructor() {
@@ -61,6 +62,10 @@ export class Profile extends React.Component {
   };
 
   render() {
+    const url =
+      'http://10.0.2.2:3333/api/v0.0.5/user/' +
+      this.state.dataSource.user_id +
+      '/photo';
     return (
       <View style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
         <CustomHeader
@@ -68,6 +73,41 @@ export class Profile extends React.Component {
           isHome={true}
           navigation={this.props.navigation}
         />
+        <Card>
+          <CardItem style={{backgroundColor: 'rgb(10,20,30)'}}>
+            <TouchableOpacity>
+              <Thumbnail style={{width: 60, height: 60}} source={{uri: url}} />
+              <Body>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: 'white',
+                    left: 65,
+                    bottom: 55,
+                  }}>
+                  {this.state.dataSource.given_name}
+                </Text>
+              </Body>
+            </TouchableOpacity>
+          </CardItem>
+
+          <CardItem style={{justifyContent:'center',backgroundColor: 'rgb(10,20,30)'}}>
+            <Button
+              style={{padding: 15, height: 20, right:15}}
+              block
+              onPress={() => this.props.navigation.navigate('Feed')}>
+              <Text>Following</Text>
+            </Button>
+
+            <Button
+              style={{padding: 15, height: 20, left:15}}
+              block
+              onPress={() => this.props.navigation.navigate('Feed')}>
+              <Text>Followers</Text>
+            </Button>
+          </CardItem>
+        </Card>
         <FlatList
           data={this.state.dataSource.recent_chits}
           keyExtractor={({id}, index) => 1}

@@ -7,6 +7,8 @@ export * from './tabs/feed/FeedDetail';
 export * from './tabs/search/Search';
 export * from './tabs/search/SearchDetail';
 
+export * from './tabs/postChit';
+
 export * from './drawer/Profile';
 export * from './drawer/Setting';
 

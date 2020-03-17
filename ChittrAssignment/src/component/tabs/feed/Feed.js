@@ -16,8 +16,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 //import FloatingButton from '../../FloatingButton';
 
 export class Feed extends React.Component {
-  FloatingButtonEvent = () => {
-    Alert.alert('Floating button clicked');
+  FloatingButtonEvent () {
+    this.props.navigation.navigate('postChit');
   };
 
   constructor() {
@@ -81,7 +81,7 @@ export class Feed extends React.Component {
 
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={this.FloatingButtonEvent}
+          onPress={() => this.FloatingButtonEvent()}
           style={styles.TouchableOpacity}>
           {/* <Image
             source={IMAGE.ICON_LHSMENU}
