@@ -8,6 +8,8 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import Octicons from 'react-native-vector-icons/Octicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Root } from "native-base";
+
 
 import {
   SideMenu,
@@ -137,6 +139,7 @@ const authStack = createStackNavigator({
 
 const MainApp = createSwitchNavigator(
   {
+
     app: appDrawer,
     auth: authStack,
   },
@@ -147,8 +150,13 @@ const MainApp = createSwitchNavigator(
 
 const AppNavigator = createAppContainer(MainApp);
 
-export default class App extends React.Component {
-  render() {
-    return <AppNavigator />;
-  }
-}
+export default () =>
+  <Root>
+    <AppNavigator />
+  </Root>;
+
+// export default class App extends React.Component {
+//   render() {
+//     return <AppNavigator />;
+//   }
+// }

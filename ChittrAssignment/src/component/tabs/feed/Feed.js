@@ -10,10 +10,12 @@ import {
   Image,
 } from 'react-native';
 import {CustomHeader} from '../../CustomHeader';
-import {Card, CardItem, Thumbnail, Button} from 'native-base';
+import {Card, CardItem, Thumbnail,Toast, Button} from 'native-base';
 import {IMAGE} from '../../../constants/Image';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 //import FloatingButton from '../../FloatingButton';
+import AutoHeightImage from 'react-native-auto-height-image';
+
 
 export class Feed extends React.Component {
   FloatingButtonEvent () {
@@ -41,9 +43,28 @@ export class Feed extends React.Component {
       });
   }
 
+  checkLocation(item) {
+    if (
+      typeof item.location== 'undefined' ||
+      item.location == null
+    
+    ) {
+      Toast.show({
+        text: 'no location',
+        buttonText: 'Okay'
+      })
+    
+    }else{
+      this.props.navigation.navigate('Location',{latitude:item.location.latitude,longitude:item.location.longitude});
+
+    }
+  } 
+
   renderItem = ({item}) => {
     const url =
       'http://10.0.2.2:3333/api/v0.0.5/user/' + item.user.user_id + '/photo';
+    const photoURL = 
+      'http://10.0.2.2:3333/api/v0.0.5/chits/' + item.chit_id + '/photo';
     console.log(url);
     return (
       <View style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
@@ -58,11 +79,17 @@ export class Feed extends React.Component {
           </CardItem>
           <CardItem style={{backgroundColor: 'rgb(27, 40, 54)'}}>
             <Text style={styles.text}>{item.chit_content}</Text>
+
+            <AutoHeightImage
+              source={{uri:photoURL}}
+              style={{alignSelf:'center', borderRadius:10}}
+              width={200}
+              />
           </CardItem>
           <Button
               style={{padding: 15, height: 20}}
               block
-              onPress={() => this.props.navigation.navigate('Location')}>
+              onPress={() => this.checkLocation(item)}>
               <Text>View Location</Text>
             </Button>
         </Card>

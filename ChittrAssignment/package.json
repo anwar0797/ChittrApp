@@ -15,6 +15,7 @@
     "octicons": "^8.5.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-auto-height-image": "^3.0.0",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-link": "^4.1.0",
     "react-native-maps": "^0.25.0",
