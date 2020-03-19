@@ -40,13 +40,17 @@ export class Location extends React.Component {
         />
         <MapView
           provider={PROVIDER_GOOGLE}
-          style={{flex: 1}}
+          style={{width:'100%',flex:1,height:'90%'}}
           region={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
-          }}>
+          }}
+          showsUserLocation
+          zoomEnabled={true}
+          showsScale={true}
+          scrollEnabled={true}>
           <Marker coordinate={this.state} />
         </MapView>
       </View>
