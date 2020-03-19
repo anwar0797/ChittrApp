@@ -116,10 +116,6 @@ export class Feed extends React.Component {
           activeOpacity={0.5}
           onPress={() => this.FloatingButtonEvent()}
           style={styles.TouchableOpacity}>
-          {/* <Image
-            source={IMAGE.ICON_LHSMENU}
-            style={styles.FloatingButtonStyle}
-          /> */}
           <FontAwesome name="edit" size={30} />
         </TouchableOpacity>
       </View>
@@ -192,3 +188,4 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
+

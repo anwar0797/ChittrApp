@@ -54,7 +54,7 @@ export class SideMenu extends React.Component {
             {this.state.loggedUser.given_name}
           </Text>
           <Text style={styles.userHandle}>
-            @{this.state.loggedUser.given_name}
+            @{this.state.loggedUser.family_name}
           </Text>
 
           <View>
