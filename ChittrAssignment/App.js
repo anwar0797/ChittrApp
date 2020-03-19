@@ -10,6 +10,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Root } from "native-base";
 
+console.disableYellowBox = true;
+
 
 import {
   SideMenu,
@@ -86,6 +88,11 @@ const MainTabs = createBottomTabNavigator({
           color={focused ? 'rgb(29, 161, 242)' : 'rgb(136, 153, 166)'}
         />
       ),
+      //tabBarOptions:{
+        //style:{
+
+        //}
+      //}
     },
   },
 });

@@ -36,6 +36,7 @@ export class Login extends React.Component {
           placeholder="Password"
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
+          secureTextEntry={true}
           onChangeText={this.handlePassword}
         />
         <Button
@@ -77,14 +78,16 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 40,
     borderColor: '#7a42f4',
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    width:300,
     color: 'white',
   },
   Password: {
     margin: 15,
     height: 40,
     borderColor: '#7a42f4',
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    width:300,
     color: 'white',
   },
   LoginBtn: {

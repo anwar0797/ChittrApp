@@ -20,18 +20,20 @@ export class Search extends React.Component {
     };
   }
   renderItem = ({item}) => {
+    const photoUrl =
+      'http://10.0.2.2:3333/api/v0.0.5/user/' + item.user_id + '/photo';
     return (
       <View>
         <List style={{borderColor: 'white', borderWidth: 0.5}}>
           <ListItem onPress={() => this.props.navigation.navigate('Profile')}>
-            <Thumbnail style={styles.photo} source={IMAGE.ICON_USER_DEFAULT} />
+            <Thumbnail style={styles.photo} source={{uri:photoUrl}} />
             <Text style={{color: 'white', marginLeft:10}}>{item.given_name}</Text>
             <ListItem>
               <Text style={{color: 'white'}}>@{item.given_name}</Text>
             </ListItem>
           </ListItem>
         </List>
-      </View>
+      </View> 
     );
   };
 
@@ -45,7 +47,7 @@ export class Search extends React.Component {
         this.setState({
           dataSource: responseJson,
         });
-      })
+      }) 
       .catch(error => {
         console.error(error);
       });
