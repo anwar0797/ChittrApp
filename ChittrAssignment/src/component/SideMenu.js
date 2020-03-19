@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import {Text, List, ListItem} from 'native-base';
 import {IMAGE} from '../constants/Image';
@@ -16,6 +17,29 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export class SideMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedUser: [],
+    };
+  }
+
+  async componentDidMount() {
+    const id = await AsyncStorage.getItem('@id');
+    console.log('passed id' + id);
+    fetch('http://10.0.2.2:3333/api/v0.0.5/user/' + id)
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          loggedUser: responseJson,
+        });
+        console.log(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   render() {
     const {navigation} = this.props;
     return (
@@ -26,8 +50,12 @@ export class SideMenu extends React.Component {
             source={IMAGE.ICON_USER_DEFAULT}
             style={styles.photo}
           />
-          <Text style={styles.userName}>Username</Text>
-          <Text style={styles.userHandle}>@Username</Text>
+          <Text style={styles.userName}>
+            {this.state.loggedUser.given_name}
+          </Text>
+          <Text style={styles.userHandle}>
+            @{this.state.loggedUser.given_name}
+          </Text>
 
           <View>
             <Text style={styles.followingCount}>
