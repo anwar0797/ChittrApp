@@ -105,17 +105,23 @@ export class Profile extends React.Component {
 
           <CardItem style={{justifyContent:'center',backgroundColor: 'rgb(10,20,30)'}}>
             <Button
-              style={{padding: 15, height: 20, right:15}}
+              style={{padding: 10, height: 30, right:15}}
               block
               onPress={() => this.props.navigation.navigate('Feed')}>
               <Text>Following</Text>
             </Button>
 
             <Button
-              style={{padding: 15, height: 20, left:15}}
+              style={{padding: 10, height: 30, left:15, right:15}}
               block
               onPress={() => this.props.navigation.navigate('Feed')}>
               <Text>Followers</Text>
+            </Button>
+            <Button
+              style={{padding: 20, height: 30, left:45}}
+              block
+              onPress={() => this.props.navigation.navigate('Feed')}>
+              <Text>FOLLOW</Text>
             </Button>
           </CardItem>
         </Card>
