@@ -71,7 +71,7 @@ export class Feed extends React.Component {
         <Card style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
           <CardItem style={{backgroundColor: 'rgb(27, 40, 54)'}}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Profile')}>
+              onPress={() => this.props.navigation.navigate('Profile', {user_id: item.user.user_id})}>
               <Thumbnail source={{uri: url}} />
             </TouchableOpacity>
             <Text style={styles.textName}>{item.user.given_name}</Text>

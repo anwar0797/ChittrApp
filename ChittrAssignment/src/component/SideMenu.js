@@ -40,6 +40,19 @@ export class SideMenu extends React.Component {
       });
   }
 
+  handleSignOut = async() => {
+    const tokenLogOut = await AsyncStorage.getItem('@token');
+
+    fetch('http://10.0.2.2:3333/api/v0.0.5/logout' ,{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Authorization': tokenLogOut}
+    })
+    .then(this.props.navigation.navigate('auth'),
+     alert("Successful sign out")
+    )
+    //AsyncStorage.clear()
+  }
+
   render() {
     const {navigation} = this.props;
     return (
@@ -71,7 +84,7 @@ export class SideMenu extends React.Component {
 
         <ScrollView>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Profile')}
+            onPress={() => navigation.navigate('Profile', {user_id: this.state.loggedUser.user_id})}
             style={[styles.list, styles.firstList]}>
             <View>
               <FontAwesome
@@ -102,7 +115,7 @@ export class SideMenu extends React.Component {
         <List>
           <ListItem
             noBorder
-            onPress={() => this.props.navigation.navigate('auth')}>
+            onPress={this.handleSignOut}>
             <Text style={{color: 'white'}}>Logout</Text>
           </ListItem>
         </List>

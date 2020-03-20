@@ -10,6 +10,7 @@ import {
 import {CustomHeader} from '../CustomHeader';
 import {Card, CardItem, Thumbnail, Body, Button} from 'native-base';
 import {IMAGE} from '../../constants/Image';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 export class Profile extends React.Component {
   constructor() {
@@ -20,7 +21,8 @@ export class Profile extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'http://10.0.2.2:3333/api/v0.0.5/user/1';
+    const user_id = this.props.navigation.state.params.user_id;
+    const url = 'http://10.0.2.2:3333/api/v0.0.5/user/' + user_id;
     fetch(url)
       .then(response => response.json())
       .then(responseJson => {
@@ -38,6 +40,9 @@ export class Profile extends React.Component {
       'http://10.0.2.2:3333/api/v0.0.5/user/' +
       this.state.dataSource.user_id +
       '/photo';
+
+      const photoURL = 
+      'http://10.0.2.2:3333/api/v0.0.5/chits/' + item.chit_id + '/photo';
     return (
       <View style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
         <Card style={{flex: 0, backgroundColor: 'rgb(27, 40, 54)'}}>
@@ -55,6 +60,12 @@ export class Profile extends React.Component {
           <CardItem style={styles.cardText}>
             {/* <Text>@{this.state.dataSource.given_name}</Text> */}
             <Text style={styles.text}>{item.chit_content}</Text>
+
+            <AutoHeightImage
+              source={{uri:photoURL}}
+              style={{alignSelf:'center', borderRadius:10}}
+              width={200}
+              />
           </CardItem>
         </Card>
       </View>

@@ -25,7 +25,7 @@ export class Search extends React.Component {
     return (
       <View>
         <List style={{borderColor: 'white', borderWidth: 0.5}}>
-          <ListItem onPress={() => this.props.navigation.navigate('Profile')}>
+          <ListItem onPress={() => this.props.navigation.navigate('Profile', {user_id: item.user_id})}>
             <Thumbnail style={styles.photo} source={{uri:photoUrl}} />
             <Text style={{color: 'white', marginLeft:10}}>{item.given_name}</Text>
             <ListItem>
@@ -84,7 +84,6 @@ export class Search extends React.Component {
           data={this.state.dataSource}
           keyExtractor={({id}, index) => id}
           renderItem={this.renderItem}
-          onPress={() => this.props.navigate.navigation('Profile')}
         />
       </View>
     );

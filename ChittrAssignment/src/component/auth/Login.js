@@ -37,7 +37,8 @@ export class Login extends React.Component {
       .catch(responseJson => {
         alert('Invalid Login Credentials');
       });
-    //console.log(responseJson)
+      const token = await AsyncStorage.getItem('@token')
+    console.log(token.toString());
   };
 
   render() {
@@ -123,3 +124,5 @@ const styles = StyleSheet.create({
     height: 40,
   },
 });
+
+
