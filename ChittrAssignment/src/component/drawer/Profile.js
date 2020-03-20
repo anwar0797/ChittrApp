@@ -6,9 +6,10 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import {CustomHeader} from '../CustomHeader';
-import {Card, CardItem, Thumbnail, Body, Button} from 'native-base';
+import {Card, CardItem, Thumbnail, Body, Button, Right} from 'native-base';
 import {IMAGE} from '../../constants/Image';
 import AutoHeightImage from 'react-native-auto-height-image';
 
@@ -35,13 +36,52 @@ export class Profile extends React.Component {
       });
   }
 
+  handleFollow = async () => {
+    const id = await AsyncStorage.getItem('@token');
+    fetch(
+      'http://10.0.2.2:3333/api/v0.0.5/user/' +
+        this.state.dataSource.user_id +
+        '/follow',
+      {
+        method: 'POST',
+        headers: {
+          'X-Authorization': id,
+        },
+      },
+    ).then(response => response.json());
+
+    alert('Followed').catch(response => {
+      alert('Unable to follow');
+    });
+    //console.log(responseJson)
+  };
+
+  handleUnfollow = async () => {
+    const id = await AsyncStorage.getItem('@token');
+    fetch(
+      'http://10.0.2.2:3333/api/v0.0.5/user/' +
+        this.state.dataSource.user_id +
+        '/follow',
+      {
+        method: 'DELETE',
+        headers: {
+          'X-Authorization': id,
+        },
+      },
+    ).then(response => response.json());
+
+    alert('Unfollowed').catch(response => {
+      alert('Unable to unfollow');
+    });
+  };
+
   renderItem = ({item}) => {
     const url =
       'http://10.0.2.2:3333/api/v0.0.5/user/' +
       this.state.dataSource.user_id +
       '/photo';
 
-      const photoURL = 
+    const photoURL =
       'http://10.0.2.2:3333/api/v0.0.5/chits/' + item.chit_id + '/photo';
     return (
       <View style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
@@ -62,10 +102,10 @@ export class Profile extends React.Component {
             <Text style={styles.text}>{item.chit_content}</Text>
 
             <AutoHeightImage
-              source={{uri:photoURL}}
-              style={{alignSelf:'center', borderRadius:10}}
+              source={{uri: photoURL}}
+              style={{alignSelf: 'center', borderRadius: 10}}
               width={200}
-              />
+            />
           </CardItem>
         </Card>
       </View>
@@ -91,7 +131,7 @@ export class Profile extends React.Component {
               <Body>
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: 'bold',
                     color: 'white',
                     left: 65,
@@ -101,27 +141,41 @@ export class Profile extends React.Component {
                 </Text>
               </Body>
             </TouchableOpacity>
+            <Right>
+              <Button
+                block
+                style={{padding: 10, height: 30, top: 15, right: 5}}
+                onPress={this.handleFollow}>
+                <Text>FOLLOW</Text>
+              </Button>
+            </Right>
+            <Right>
+              <Button
+                block
+                style={{padding: 10, height: 30, top: 15}}
+                onPress={this.handleUnfollow}>
+                <Text>UNFOLLOW</Text>
+              </Button>
+            </Right>
           </CardItem>
 
-          <CardItem style={{justifyContent:'center',backgroundColor: 'rgb(10,20,30)'}}>
+          <CardItem
+            style={{
+              justifyContent: 'center',
+              backgroundColor: 'rgb(10,20,30)',
+            }}>
             <Button
-              style={{padding: 10, height: 30, right:15}}
+              style={{padding: 10, height: 30, right: 15}}
               block
               onPress={() => this.props.navigation.navigate('Feed')}>
               <Text>Following</Text>
             </Button>
 
             <Button
-              style={{padding: 10, height: 30, left:15, right:15}}
+              style={{padding: 10, height: 30, left: 15, right: 15}}
               block
               onPress={() => this.props.navigation.navigate('Feed')}>
               <Text>Followers</Text>
-            </Button>
-            <Button
-              style={{padding: 20, height: 30, left:45}}
-              block
-              onPress={() => this.props.navigation.navigate('Feed')}>
-              <Text>FOLLOW</Text>
             </Button>
           </CardItem>
         </Card>
