@@ -13,16 +13,19 @@ import {Card, CardItem, Thumbnail, Body, Button, Right} from 'native-base';
 import {IMAGE} from '../../constants/Image';
 import AutoHeightImage from 'react-native-auto-height-image';
 
+
 export class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
       dataSource: [],
+      userID:''
     };
   }
 
   componentDidMount() {
     const user_id = this.props.navigation.state.params.user_id;
+    this.setState({userID:user_id});
     const url = 'http://10.0.2.2:3333/api/v0.0.5/user/' + user_id;
     fetch(url)
       .then(response => response.json())
@@ -167,14 +170,18 @@ export class Profile extends React.Component {
             <Button
               style={{padding: 10, height: 30, right: 15}}
               block
-              onPress={() => this.props.navigation.navigate('Feed')}>
+              onPress={() => this.props.navigation.navigate('Following',{
+                user_id:this.state.userID,
+                query:'following'})}> 
               <Text>Following</Text>
             </Button>
 
             <Button
               style={{padding: 10, height: 30, left: 15, right: 15}}
               block
-              onPress={() => this.props.navigation.navigate('Feed')}>
+              onPress={() => this.props.navigation.navigate('Following',{
+                user_id:this.state.userID,
+                query:'followers'})}>
               <Text>Followers</Text>
             </Button>
           </CardItem>

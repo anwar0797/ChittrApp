@@ -10,6 +10,8 @@ export * from './tabs/search/SearchDetail';
 export * from './tabs/postChit';
 export * from './tabs/Location';
 
+export * from './Following'
+
 export * from './drawer/Profile';
 export * from './drawer/Setting';
 

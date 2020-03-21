@@ -24,7 +24,8 @@ import {
   Login,
   Register,
   postChit,
-  Location
+  Location,
+  Following
 } from './src/component';
 
 const navOptionHandler = navigation => ({
@@ -119,6 +120,10 @@ const MainStack = createStackNavigator(
       screen: Location,
       navigationOptions: navOptionHandler
     },
+    Following: {
+      screen: Following,
+      navigationOptions: navOptionHandler
+    }
   },
   {initialRouteName: 'Home'},
 );
