@@ -14,6 +14,7 @@ export * from './Following'
 
 export * from './drawer/Profile';
 export * from './drawer/Setting';
+export * from './Update'
 
 export * from './auth/Login';
 export * from './auth/Register';

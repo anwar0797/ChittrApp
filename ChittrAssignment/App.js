@@ -25,7 +25,8 @@ import {
   Register,
   postChit,
   Location,
-  Following
+  Following,
+  Update
 } from './src/component';
 
 const navOptionHandler = navigation => ({
@@ -122,6 +123,10 @@ const MainStack = createStackNavigator(
     },
     Following: {
       screen: Following,
+      navigationOptions: navOptionHandler
+    },
+    Update: {
+      screen: Update,
       navigationOptions: navOptionHandler
     }
   },

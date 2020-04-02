@@ -98,7 +98,7 @@ export class SideMenu extends React.Component {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Setting')}
+            onPress={() => navigation.navigate('Setting', {user_id: this.state.loggedUser.user_id})}
             style={[styles.list, styles.firstList]}>
             <View>
               <FontAwesome
