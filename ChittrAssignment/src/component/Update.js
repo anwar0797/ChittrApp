@@ -53,7 +53,7 @@ export class Update extends React.Component {
       this.props.navigation.navigate('Feed');
     }).catch(responseJson =>{alert('Unable to update')})
     
-    //console.log(responseJson)
+    console.log(responseJson)
   }
 
   render() {
