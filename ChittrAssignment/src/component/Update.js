@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, AsyncStorage} from 'react-native';
-import {Text, Button} from 'native-base';
+import {Text, Button, TabHeading} from 'native-base';
 import {CustomHeader} from '../component/CustomHeader';
 
 export class Update extends React.Component {
@@ -27,34 +27,19 @@ export class Update extends React.Component {
   handleEmail = text => {
     this.setState({email: text})
   };
-  handlePassword = text => {
+  handlePassword = text => { 
     this.setState({password: text})
   };
   handleConfirmPass = text => {
     this.setState({confirm_pass: text})
   };
 
-  async componentDidMount() {
-    const user_id = await AsyncStorage.getItem('@id');
-    this.setState({userID:user_id});
-    console.log('passed id' + id);
-    fetch('http://10.0.2.2:3333/api/v0.0.5/user/' + user_id)
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          loggedUser: responseJson,
-        });
-        console.log(responseJson);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
   handleUpdate = async () => {
-    fetch('http://10.0.2.2:3333/api/v0.0.5/user/' + this.state.dataSource.user_id, {
+    const id = await AsyncStorage.getItem('@id');
+    const token = await AsyncStorage.getItem('@token');
+    fetch('http://10.0.2.2:3333/api/v0.0.5/user/' + id, {
       method:'PATCH',
-      headers:{'Content-Type': 'application/json'},
+      headers:{'Content-Type': 'application/json', 'X-Authorization': token},
       body: JSON.stringify({
         family_name: this.state.family_name,
         given_name: this.state.given_name,
@@ -67,7 +52,8 @@ export class Update extends React.Component {
       alert("successful");
       this.props.navigation.navigate('Feed');
     }).catch(responseJson =>{alert('Unable to update')})
-    console.log(responseJson)
+    
+    //console.log(responseJson)
   }
 
   render() {
@@ -79,21 +65,21 @@ export class Update extends React.Component {
 
           <TextInput
             style={styles.textName}
-            placeholder={this.state.loggedUser.given_name}
+            placeholder="Name"
             placeholderTextColor="white"
-            value={this.state.given_name}
+            // value={this.state.given_name}
             onChangeText={this.handleName}
           />
           <TextInput
             style={styles.textFamily}
-            placeholder={this.state.loggedUser.family_name}
+            placeholder="Family Name"
             placeholderTextColor="white"
             // value={this.state.family_name}
             onChangeText={this.handleFamilyName}
           />
           <TextInput
             style={styles.textEmail}
-            placeholder={this.state.loggedUser.email}
+            placeholder="Email"
             placeholderTextColor="white"
             // value={this.state.email}
             onChangeText={this.handleEmail}
