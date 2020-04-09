@@ -10,17 +10,16 @@ import {
   Image,
 } from 'react-native';
 import {CustomHeader} from '../../CustomHeader';
-import {Card, CardItem, Thumbnail,Toast, Button} from 'native-base';
+import {Card, CardItem, Thumbnail, Toast, Button, Body} from 'native-base';
 import {IMAGE} from '../../../constants/Image';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 //import FloatingButton from '../../FloatingButton';
 import AutoHeightImage from 'react-native-auto-height-image';
 
-
 export class Feed extends React.Component {
-  FloatingButtonEvent () {
+  FloatingButtonEvent() {
     this.props.navigation.navigate('postChit');
-  };
+  }
 
   constructor() {
     super();
@@ -36,7 +35,7 @@ export class Feed extends React.Component {
       'willFocus',
       () => {
         this.getData();
-      }
+      },
     );
   }
 
@@ -47,32 +46,31 @@ export class Feed extends React.Component {
   getData = () => {
     const url = 'http://10.0.2.2:3333/api/v0.0.5/chits';
     //this.setState({isLoading:true})
-    fetch(url).then(res => res.json()).then(res => {
-      this.setState({dataSource: res})
-    })//.finally(() => this.setState({isLoading:false}))
-  }
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({dataSource: res});
+      }); //.finally(() => this.setState({isLoading:false}))
+  };
 
   checkLocation(item) {
-    if (
-      typeof item.location== 'undefined' ||
-      item.location == null
-    
-    ) {
+    if (typeof item.location == 'undefined' || item.location == null) {
       Toast.show({
         text: 'no location',
-        buttonText: 'Okay'
-      })
-    
-    }else{
-      this.props.navigation.navigate('Location',{latitude:item.location.latitude,longitude:item.location.longitude});
-
+        buttonText: 'Okay',
+      });
+    } else {
+      this.props.navigation.navigate('Location', {
+        latitude: item.location.latitude,
+        longitude: item.location.longitude,
+      });
     }
-  } 
+  }
 
   renderItem = ({item}) => {
     const url =
       'http://10.0.2.2:3333/api/v0.0.5/user/' + item.user.user_id + '/photo';
-    const photoURL = 
+    const photoURL =
       'http://10.0.2.2:3333/api/v0.0.5/chits/' + item.chit_id + '/photo';
     console.log(url);
     return (
@@ -80,27 +78,44 @@ export class Feed extends React.Component {
         <Card style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
           <CardItem style={{backgroundColor: 'rgb(27, 40, 54)'}}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Profile', {user_id: item.user.user_id})}>
+              onPress={() =>
+                this.props.navigation.navigate('Profile', {
+                  user_id: item.user.user_id,
+                })
+              }>
               <Thumbnail source={{uri: url}} />
             </TouchableOpacity>
+
             <Text style={styles.textName}>{item.user.given_name}</Text>
             <Text style={styles.textUserName}>@{item.user.given_name}</Text>
           </CardItem>
-          <CardItem style={{backgroundColor: 'rgb(27, 40, 54)'}}>
-            <Text style={styles.text}>{item.chit_content}</Text>
 
-            <AutoHeightImage
-              source={{uri:photoURL}}
-              style={{alignSelf:'center', borderRadius:10}}
-              width={200}
+          <CardItem
+            style={{
+              backgroundColor: 'rgb(27, 40, 54)',
+              alignItems: 'flex-start',
+            }}>
+            <Body>
+              <Text style={styles.text}>{item.chit_content}</Text>
+
+              <AutoHeightImage
+                source={{uri: photoURL}}
+                style={{alignSelf: 'center', borderRadius: 10}}
+                width={200}
               />
+            </Body>
           </CardItem>
+          <Body>
+            <Text note style={{color: 'white', alignItems: 'flex-start'}}>
+              Posted on:{item.timestamp}
+            </Text>
+          </Body>
           <Button
-              style={{padding: 15, height: 20}}
-              block
-              onPress={() => this.checkLocation(item)}>
-              <Text>View Location</Text>
-            </Button>
+            style={{padding: 15, height: 20}}
+            block
+            onPress={() => this.checkLocation(item)}>
+            <Text>View Location</Text>
+          </Button>
         </Card>
       </View>
     );
@@ -163,7 +178,7 @@ const styles = StyleSheet.create({
   },
 
   textUserName: {
-    flex: 1.3,
+    flex: 1,
     fontSize: 14,
     fontWeight: 'bold',
     color: 'grey',
@@ -175,6 +190,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 53,
     padding: 10,
+    fontWeight: 'bold',
   },
   photo: {
     width: 50,
@@ -199,4 +215,3 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-

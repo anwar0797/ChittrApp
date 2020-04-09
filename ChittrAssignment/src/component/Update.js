@@ -69,8 +69,8 @@ export class Update extends React.Component {
             style={styles.textName}
             placeholder="Name"
             placeholderTextColor="white"
-            // value={this.state.given_name}
-            onChangeText={this.handleName}
+            //value={this.state.loggedUser.given_name}
+            onChangeText={this.handleName} 
           />
           <TextInput
             style={styles.textFamily}
@@ -99,7 +99,7 @@ export class Update extends React.Component {
             placeholder="Confirm Password"
             placeholderTextColor="white"
             secureTextEntry={true}
-            // value={this.state.confirm_pass}
+            //value={this.state.confirm_pass}
             onChangeText={this.handleConfirmPass}
           />
 

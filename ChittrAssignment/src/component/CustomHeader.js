@@ -15,7 +15,19 @@ import {IMAGE} from '../constants/Image';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export class CustomHeader extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dataSource: [],
+      userID:''
+    };
+  }
+
   render() {
+    const url =
+      'http://10.0.2.2:3333/api/v0.0.5/user/' +
+      this.state.dataSource.user_id +
+      '/photo';
     let {title, isHome} = this.props;
     return (
       <Header style={{backgroundColor: 'rgb(27, 40, 54)'}}>
@@ -24,7 +36,7 @@ export class CustomHeader extends React.Component {
             <TouchableOpacity
               onPress={() => this.props.navigation.openDrawer()}>
               <Thumbnail
-                source={IMAGE.ICON_USER_DEFAULT}
+                source={IMAGE.ICON_LHSMENU}
                 style={styles.thumbnail}
               />
             </TouchableOpacity>

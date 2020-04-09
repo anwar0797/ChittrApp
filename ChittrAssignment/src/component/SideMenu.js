@@ -77,13 +77,17 @@ export class SideMenu extends React.Component {
   };
 
   render() {
+    const url =
+      'http://10.0.2.2:3333/api/v0.0.5/user/' +
+      this.state.loggedUser.user_id +
+      '/photo';
     const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.top}>
           <Image
             onPress={() => this.props.navigatation.navigate('Profile')}
-            source={IMAGE.ICON_USER_DEFAULT}
+            source={{uri:url}}
             style={styles.photo}
           />
           <Text style={styles.userName}>

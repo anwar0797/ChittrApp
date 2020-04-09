@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import {Text, Button} from 'native-base';
 import {CustomHeader} from '../CustomHeader';
-//import { TextInput } from 'react-native-gesture-handler';
+
 
 export class Register extends React.Component {
   constructor(props){
@@ -61,33 +61,28 @@ export class Register extends React.Component {
         <TextInput style={styles.textName} 
         placeholder="Name"
         placeholderTextColor="white"
-        // value={this.state.given_name}
         onChangeText={this.handleName}
         />
         <TextInput style={styles.textFamily} 
         placeholder="Family Name"
         placeholderTextColor="white"
-        // value={this.state.family_name}
         onChangeText={this.handleFamilyName}
         />
         <TextInput style={styles.textEmail} 
         placeholder="Email"
         placeholderTextColor="white"
-        // value={this.state.email}
         onChangeText={this.handleEmail}
         />
         <TextInput style={styles.textPass} 
         placeholder="Password"
         placeholderTextColor="white"
         secureTextEntry={true}
-        // value={this.state.password}
         onChangeText={this.handlePassword}
         />
         <TextInput style={styles.textConfirmPass} 
         placeholder="Confirm Password"
         placeholderTextColor="white"
         secureTextEntry={true}
-        // value={this.state.confirm_pass}
         onChangeText={this.handleConfirmPass}
         />
 
@@ -95,7 +90,6 @@ export class Register extends React.Component {
           block
           light
           style={styles.RegisterBtn}
-          //onPress={() => this.props.navigation.navigate('Login')}>
           onPress= {this.handleRegister}>
           <Text style={{fontWeight: 'bold'}}>Create</Text>
         </Button>

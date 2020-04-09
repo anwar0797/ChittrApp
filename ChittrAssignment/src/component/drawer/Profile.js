@@ -52,7 +52,7 @@ export class Profile extends React.Component {
         },
       },
     ).then(response => response.json());
-
+    
     alert('Followed').catch(response => {
       alert('Unable to follow');
     });
@@ -101,7 +101,6 @@ export class Profile extends React.Component {
             </Text>
           </CardItem>
           <CardItem style={styles.cardText}>
-            {/* <Text>@{this.state.dataSource.given_name}</Text> */}
             <Text style={styles.text}>{item.chit_content}</Text>
 
             <AutoHeightImage
@@ -144,22 +143,18 @@ export class Profile extends React.Component {
                 </Text>
               </Body>
             </TouchableOpacity>
-            <Right>
               <Button
                 block
-                style={{padding: 10, height: 30, top: 15, right: 5}}
+                style={{padding: 25, height: 30, top: 5, left:'45%'}}
                 onPress={this.handleFollow}>
                 <Text>FOLLOW</Text>
               </Button>
-            </Right>
-            <Right>
               <Button
                 block
-                style={{padding: 10, height: 30, top: 15}}
+                style={{padding: 16, height: 30, top: 40, left:'15%'}}
                 onPress={this.handleUnfollow}>
                 <Text>UNFOLLOW</Text>
               </Button>
-            </Right>
           </CardItem>
 
           <CardItem
@@ -168,7 +163,7 @@ export class Profile extends React.Component {
               backgroundColor: 'rgb(10,20,30)',
             }}>
             <Button
-              style={{padding: 10, height: 30, right: 15}}
+              style={{padding: 10, height: 30,right:'30%'}}
               block
               onPress={() => this.props.navigation.navigate('Following',{
                 user_id:this.state.userID,
@@ -177,7 +172,7 @@ export class Profile extends React.Component {
             </Button>
 
             <Button
-              style={{padding: 10, height: 30, left: 15, right: 15}}
+              style={{padding: 10, height: 30, right:'28%'}}
               block
               onPress={() => this.props.navigation.navigate('Following',{
                 user_id:this.state.userID,

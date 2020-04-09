@@ -69,7 +69,7 @@ export class Following extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: 'rgb(27, 40, 54)'}}>
         <CustomHeader
-          title="Chits"
+          title="List"
           isHome={true}
           navigation={this.props.navigation}
         />
