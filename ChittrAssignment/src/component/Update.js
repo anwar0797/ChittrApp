@@ -4,8 +4,8 @@ import {Text, Button, TabHeading} from 'native-base';
 import {CustomHeader} from '../component/CustomHeader';
 
 export class Update extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       dataSource: [],
       userID: '',
@@ -49,11 +49,13 @@ export class Update extends React.Component {
     })
     .then(response => response.json())
     .then(responseJson => {
-      alert("successful");
-      this.props.navigation.navigate('Feed');
-    }).catch(responseJson =>{alert('Unable to update')})
+      alert('successful');
+      this.props.navigation.navigate('Setting');
+    })
+    .catch(responseJson =>{alert('Update Successful')
+    })
     
-    console.log(responseJson)
+    //console.log(response.json())
   }
 
   render() {

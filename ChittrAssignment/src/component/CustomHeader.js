@@ -12,6 +12,7 @@ import {
 import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {IMAGE} from '../constants/Image';
 //import Icon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export class CustomHeader extends React.Component {
   render() {
@@ -48,5 +49,10 @@ const styles = StyleSheet.create({
     height: 38,
     borderRadius: 20,
     marginTop: 5,
+  },
+  icon: {
+    position: 'absolute',
+    left: '580%',
+    top: 10,
   },
 });

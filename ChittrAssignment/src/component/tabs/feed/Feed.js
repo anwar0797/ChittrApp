@@ -26,21 +26,30 @@ export class Feed extends React.Component {
     super();
     this.state = {
       dataSource: [],
+      //isLoading: false
     };
   }
 
   componentDidMount() {
+    this.getData();
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.getData();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.willFocusSubscription.remove();
+  }
+
+  getData = () => {
     const url = 'http://10.0.2.2:3333/api/v0.0.5/chits';
-    fetch(url)
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          dataSource: responseJson,
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    //this.setState({isLoading:true})
+    fetch(url).then(res => res.json()).then(res => {
+      this.setState({dataSource: res})
+    })//.finally(() => this.setState({isLoading:false}))
   }
 
   checkLocation(item) {
@@ -110,6 +119,8 @@ export class Feed extends React.Component {
           data={this.state.dataSource}
           keyExtractor={({id}, index) => id}
           renderItem={this.renderItem}
+          //refreshing={this.state.isLoading}
+          //onRefresh={this.getData}
         />
 
         <TouchableOpacity

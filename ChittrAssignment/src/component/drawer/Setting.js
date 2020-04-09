@@ -14,6 +14,20 @@ export class Setting extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchData();
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.fetchData();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.willFocusSubscription.remove();
+  }
+
+  fetchData() {
     const user_id = this.props.navigation.state.params.user_id;
     this.setState({userID:user_id});
     const url = 'http://10.0.2.2:3333/api/v0.0.5/user/' + user_id;
